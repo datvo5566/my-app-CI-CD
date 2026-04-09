@@ -1,27 +1,30 @@
-name: Builld & Push Docker image
-on: 
+name: Build & Push Docker image
+
+on:
   push:
     branches:
       - main
+
 jobs:
   docker:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Lấy code
       - name: Checkout code
         uses: actions/checkout@v4
-      
-      - name: Login Docker Hub
-        uses: actions/login-action@v3
+
+      # 2. Login Docker Hub (QUAN TRỌNG)
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          
+
+      # 3. Build image (bạn đang build backend là đúng 👍)
       - name: Build image
-        run: |
-          docker build -t 103395dat/my-app1:latest ./backend
-      
+        run: docker build -t 103395dat/my-app1:latest ./backend
+
+      # 4. Push image
       - name: Push image
-        run: |
-          docker push 103395dat/my-app1:latest 
-      
+        run: docker push 103395dat/my-app1:latest
