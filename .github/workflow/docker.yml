@@ -1,0 +1,30 @@
+name: Builld & Push Docker image
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        user: actions/checkout@v4
+      
+      - name: Login Docker Hub
+        user: actions/checkout@v4
+            
+      - name: Checkout code
+        user: actions/checkout@v4
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Build image
+        run: |
+          docker build -t 103395dat/my-app1:latest ./backend
+      
+      - name: Push image
+        run: |
+          docker push 103395dat/my-app1:latest 
+      
