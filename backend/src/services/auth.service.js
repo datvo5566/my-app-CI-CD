@@ -36,7 +36,7 @@ async function register(data) {
 
 
 }
-
+//auth.service.js
 async function login(data) {
     const requestId = uuidv4();
     const log = logger.child({ requestId });
