@@ -2,10 +2,11 @@ FROM node:22 AS builder
 
 WORKDIR /app
 
-COPY package*.json ./
+# copy đúng backend
+COPY backend/package*.json ./
 RUN npm install
 
-COPY . .
+COPY backend .
 
 RUN ls -R
 
@@ -15,7 +16,7 @@ FROM node:22
 
 WORKDIR /app
 
-COPY --from=builder /app ./
+COPY --from=builder /app .
 
 EXPOSE 5000
 
