@@ -7,9 +7,10 @@ RUN npm install
 
 COPY . .
 
+RUN ls -R
+
 RUN npx prisma generate
 
-# ===== production =====
 FROM node:22
 
 WORKDIR /app
