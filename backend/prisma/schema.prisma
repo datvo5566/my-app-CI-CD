@@ -3,16 +3,15 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlserver"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model Users {
-  id   Int     @id(map: "PK__Users__3213E83F7AFDD1CB") @default(autoincrement())
-  name String? @db.NVarChar(255)
+  id   Int     @id @default(autoincrement())
+  name String?
   email String @unique 
-  role String? @db.NVarChar(50)
-  password String @db.NVarChar(255)
+  role String?
+  password String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
