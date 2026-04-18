@@ -12,6 +12,8 @@ RUN ls -R
 
 RUN npx prisma generate
 
+RUN npx prisma migrate deploy
+
 FROM node:22
 
 WORKDIR /app
