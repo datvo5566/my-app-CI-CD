@@ -16,6 +16,9 @@ const getUsers = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+const findbyUser = async (req, res) => {
+
+}
 // GET DETAIL
 const getUserById = async (req, res) => {
     try {
