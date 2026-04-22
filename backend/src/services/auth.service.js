@@ -90,7 +90,12 @@ async function login(data) {
             { email: data.email, userId: user.id },
             "Login success"
         )
-        return user;
+        const accessToken = jwtUtil.generateAccessToken;
+        const refreshToken = jwtUtil.generateRefreshToken;
+        return {
+            accessToken,
+            refreshToken
+        };
 
     } catch (err) {
         log.error(
