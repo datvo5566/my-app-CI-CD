@@ -1,17 +1,15 @@
 FROM node:18 AS build
 WORKDIR /app
 
-COPY frontend/package*.json ./
+COPY ./frontend/package*.json ./
 RUN npm install
 
-COPY frontend/ .
+COPY ./frontend/ .
 RUN npm run build
 
 FROM nginx:alpine
 
 COPY --from=build /app/build /usr/share/nginx/html
-COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
-
-RUN echo "🔥 THIS IS FRONTEND DOCKERFILE"
+COPY ./frontend/nginx.conf /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
