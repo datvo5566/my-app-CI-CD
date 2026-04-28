@@ -11,7 +11,7 @@ export async function login(data) {
     saveTokens(accessToken, refreshToken)
     console.log("Đang thực hiện bước 4....")
     console.log("Data= ", res.data.data)
-    return res.data
+    return res.data.data
     console.log("Đang trả dữ liệu để kết thúc....")
 }
 
