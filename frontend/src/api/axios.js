@@ -2,21 +2,19 @@
 import axios from "axios"
 import { getAccessToken, getRefreshToken, saveTokens, clearTokens } from "../utils/tokenStorage"
 const API_URL = process.env.REACT_APP_API_URL;
-console.log("API_URL:", API_URL)
 const axiosClient = axios.create({
     baseURL: API_URL
 })
-
 /* REQUEST INTERCEPTOR */
 
 axiosClient.interceptors.request.use((config) => {
 
     const token = getAccessToken()
-
+    console.log("D1")
     if (token) {
         config.headers.Authorization = `Bearer ${token}`
     }
-
+    console.log("config = ", config)
     return config
 })
 
@@ -36,14 +34,14 @@ axiosClient.interceptors.response.use(
             originalRequest._retry = true
 
             try {
-
+                console.log("B1");
                 const refreshToken = getRefreshToken()
-
+                console.log("B2");
                 const res = await axios.post(
                     `${API_URL}/auth/refresh`,
                     { refreshToken }
                 )
-
+                console.log("B3");
                 const { accessToken } = res.data
 
                 saveTokens(accessToken, refreshToken)

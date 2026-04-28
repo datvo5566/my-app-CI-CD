@@ -3,11 +3,16 @@
 import axiosClient from "../api/axios";
 import { getRefreshToken, saveTokens, clearTokens, getAccessToken } from "../utils/tokenStorage";
 export async function login(data) {
-
+    console.log("Đang thực hiện bước 1....")
     const res = await axiosClient.post("/login", data)
-    const { accessToken, refreshToken } = res.data
+    console.log("Đang thực hiện bước 2")
+    const { accessToken, refreshToken } = res.data.data
+    console.log("Đang thực hiện bước 3....")
     saveTokens(accessToken, refreshToken)
+    console.log("Đang thực hiện bước 4....")
+    console.log("Data= ", res.data.data)
     return res.data
+    console.log("Đang trả dữ liệu để kết thúc....")
 }
 
 export async function register(data) {

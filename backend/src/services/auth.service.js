@@ -49,26 +49,26 @@ async function login(data) {
         const user = await retry(
             () =>
                 circuitBreaker.fire(() =>
-                // withTimeout(
-                //     prisma.users.findUnique({
-                //         where: { email: data.email },
-                //     }),
-                //     DB_TIMEOUT  // timeout 2s
-                // )
-                //case 1: DB chết / timeout
-                // {
-                //     throw new Error("DB giả lập bị chết");
+                    withTimeout(
+                        prisma.users.findUnique({
+                            where: { email: data.email },
+                        }), 5
+                    DB_TIMEOUT  // timeout 2s
+                    )
+                    //case 1: DB chết / timeout
+                    // {
+                    //     throw new Error("DB giả lập bị chết");
 
-                // }
-                //case 2: Transient error (lúc được lúc không)
-                {
-                    if (Math.random() < 0.5) {
-                        throw new Error("Random fail");
-                    }
-                    return prisma.users.findUnique({
-                        where: { email: data.email }
-                    })
-                }
+                    // }
+                    //case 2: Transient error (lúc được lúc không)
+                    // {
+                    //     if (Math.random() < 0.5) {
+                    //         throw new Error("Random fail");
+                    //     }
+                    //     return prisma.users.findUnique({
+                    //         where: { email: data.email }
+                    //     })
+                    // }
                 ),
             {
                 retries: RETRY_COUNT,
@@ -90,8 +90,8 @@ async function login(data) {
             { email: data.email, userId: user.id },
             "Login success"
         )
-        const accessToken = jwtUtil.generateAccessToken;
-        const refreshToken = jwtUtil.generateRefreshToken;
+        const accessToken = jwtUtil.generateAccessToken(user);
+        const refreshToken = jwtUtil.generateRefreshToken(user);
         return {
             accessToken,
             refreshToken

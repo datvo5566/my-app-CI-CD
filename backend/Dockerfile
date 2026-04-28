@@ -7,6 +7,9 @@ RUN npm install
 
 COPY backend .
 
+
+
+
 RUN npx prisma generate
 
 
