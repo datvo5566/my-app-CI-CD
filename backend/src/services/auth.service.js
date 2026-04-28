@@ -52,8 +52,8 @@ async function login(data) {
                     withTimeout(
                         prisma.users.findUnique({
                             where: { email: data.email },
-                        }), 5
-                    DB_TIMEOUT  // timeout 2s
+                        }),
+                        DB_TIMEOUT  // timeout 2s
                     )
                     //case 1: DB chết / timeout
                     // {
