@@ -5,11 +5,11 @@ const API_URL = process.env.REACT_APP_API_URL;
 const axiosClient = axios.create({
     baseURL: API_URL
 })
-console.log("API CONSOLE: " + API_URL)
 /* REQUEST INTERCEPTOR */
 
 axiosClient.interceptors.request.use((config) => {
-
+    console.log("API CONSOLE: " + API_URL)
+    /* REQUEST INTERCEPTOR */
     const token = getAccessToken()
     console.log("D1")
     if (token) {
