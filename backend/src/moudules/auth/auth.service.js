@@ -62,6 +62,7 @@ async function register(data) {
         email: data.email,
         password: hashedPassword
     })
+    console.log("User currently =  ", user);
     return {
         message: "Register successful",
         UserId: user.id
