@@ -11,6 +11,7 @@ const logger = require('../utils/logger');
 const { v4: uuidv4 } = require('uuid');
 async function register(data) {
 
+    console.log("🚀 VERSION REGISTER V2");
     console.log("Đang vào register service.....");
     console.log("step 1....")
     const existing = await prisma.users.findUnique({

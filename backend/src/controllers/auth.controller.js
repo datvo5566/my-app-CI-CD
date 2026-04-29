@@ -21,6 +21,7 @@ async function login(req, res, next) {
 
 async function register(req, res, next) {
     try {
+        console.log("🚀 VERSION REGISTER V2");
         console.log("Đang vào register.... ")
         const result = await authService.register(req.body)
         res.json(result)
